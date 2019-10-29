@@ -10,8 +10,15 @@ app.use(bodyParser.json());
 
 const storage = require('../storage/storage');
 
+
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.render('index', {
+        lastLap: storage.getLastLaps(1),
+        numberLastLaps: 5,
+        numberBestLaps: 3,
+        lastLaps: storage.getLastLaps(5),
+        bestLaps: storage.getBestLaps(3)
+    })
 })
 
 app.get('/laps', (req, res) => {

@@ -1,0 +1,10 @@
+<h2>Last lap: {{#with lastLap as |lap|}} {{lap.time}} {{/with}}</h2>
+<p>{{lastLap}}</p>
+<table>
+    {{#each lastLaps as |lap|}}
+        <tr>
+            <td>{{ lap.time }}</td>
+            <td>{{ lap.when }}</td>
+        </tr>
+    {{/each}}
+</table>
