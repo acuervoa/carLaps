@@ -1,4 +1,6 @@
-const fs = require('fs');
+const fs = require('fs')
+const util = require('util')
+
 
 let carLaps = [];
 
@@ -59,7 +61,7 @@ const deleteAll = () => {
 
     carLaps = [];
 
-    saveDB();
+    saveDB()
 
     return {
         message: `All laps are deleted`
@@ -70,17 +72,36 @@ const deleteAll = () => {
 const getLastLaps = (number) => {
 
     loadDB();
-    return carLaps.sort((a, b) => {
+    let carLapsOrdered = carLaps.sort((a, b) => {
         return (b.when - a.when)
     }).slice(0, number)
+
+    let newValue = (carLapsOrdered.forEach((car) => {
+        let mls = new Date(car.time)
+        car.converted = util.format('%d:%s.%s', mls.getMinutes(), ('0' + mls.getSeconds()).slice(-2), ('000' + mls.getMilliseconds()).slice(-3))
+    }))
+
+    return carLapsOrdered
+
+
 }
 
 const getBestLaps = (number) => {
 
-    loadDB();
-    return carLaps.sort((a, b) => {
+    loadDB()
+
+    let carLapsOrdered = carLaps.sort((a, b) => {
         return (a.time - b.time)
     }).slice(0, number)
+
+
+    let newValue = (carLapsOrdered.forEach((car) => {
+        let mls = new Date(car.time)
+        car.converted = util.format('%d:%s.%s', mls.getMinutes(), ('0' + mls.getSeconds()).slice(-2), ('000' + mls.getMilliseconds()).slice(-3))
+    }))
+
+    return carLapsOrdered
+
 }
 
 module.exports = {

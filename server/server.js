@@ -1,14 +1,16 @@
+const path = require('path')
 const express = require('express')
 const app = express()
 
 const hbs = require('hbs')
-require(__dirname + "/../views/helpers/helpers")
+require(path.join(__dirname, '/../views/helpers/helpers'))
 
-app.use(require('./routes/carlap'));
-app.use(express.static(__dirname + '/../public'));
+app.use(require('./routes/carlap'))
 
-hbs.registerPartials(__dirname + '/../views/partials')
+app.use(express.static(path.join(__dirname, '/../public')))
+
+hbs.registerPartials(path.join(__dirname, '/../views/partials'))
 
 app.set('view engine', 'hbs')
 
-app.listen(3000, () => { console.log("Server listen to port 3000") })
+app.listen(3000, () => { console.log('Server listen to port 3000') })

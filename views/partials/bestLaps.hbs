@@ -1,1 +1,3 @@
-<h2>{{numberBestLaps}} : BestLaps : {{ bestLaps }}</h2>
+{{#each this }}
+  <li><span>{{ this.converted }}</span></li>
+{{/each}}
